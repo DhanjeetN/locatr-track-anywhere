@@ -14,7 +14,71 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      devices: {
+        Row: {
+          created_at: string
+          device_code: string
+          device_name: string | null
+          id: string
+          last_seen: string | null
+        }
+        Insert: {
+          created_at?: string
+          device_code: string
+          device_name?: string | null
+          id?: string
+          last_seen?: string | null
+        }
+        Update: {
+          created_at?: string
+          device_code?: string
+          device_name?: string | null
+          id?: string
+          last_seen?: string | null
+        }
+        Relationships: []
+      }
+      locations: {
+        Row: {
+          accuracy: number | null
+          battery_level: number | null
+          device_id: string
+          id: string
+          is_moving: boolean | null
+          latitude: number
+          longitude: number
+          timestamp: string
+        }
+        Insert: {
+          accuracy?: number | null
+          battery_level?: number | null
+          device_id: string
+          id?: string
+          is_moving?: boolean | null
+          latitude: number
+          longitude: number
+          timestamp?: string
+        }
+        Update: {
+          accuracy?: number | null
+          battery_level?: number | null
+          device_id?: string
+          id?: string
+          is_moving?: boolean | null
+          latitude?: number
+          longitude?: number
+          timestamp?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "locations_device_id_fkey"
+            columns: ["device_id"]
+            isOneToOne: false
+            referencedRelation: "devices"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
