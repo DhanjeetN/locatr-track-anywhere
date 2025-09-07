@@ -110,22 +110,26 @@ export const DeviceDashboard = () => {
 
   return (
     <div className="space-y-6">
-      <Card>
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <Search className="w-5 h-5" />
+      <Card className="glass-effect shadow-elegant">
+        <CardHeader className="pb-4">
+          <CardTitle className="flex items-center gap-2 text-lg">
+            <div className="p-2 bg-primary/10 rounded-lg">
+              <Search className="w-5 h-5 text-primary" />
+            </div>
             Track Device
           </CardTitle>
         </CardHeader>
         <CardContent>
           <div className="flex gap-2">
             <Input
-              placeholder="Enter device code to track..."
+              placeholder="Enter 6-digit device code..."
               value={searchCode}
-              onChange={(e) => setSearchCode(e.target.value)}
+              onChange={(e) => setSearchCode(e.target.value.toUpperCase())}
               onKeyPress={handleKeyPress}
+              className="text-center text-base font-mono tracking-wider"
+              maxLength={6}
             />
-            <Button onClick={searchDevice} disabled={loading}>
+            <Button onClick={searchDevice} disabled={loading} className="px-4 transition-smooth">
               {loading ? 'Searching...' : 'Track'}
             </Button>
           </div>
@@ -134,10 +138,12 @@ export const DeviceDashboard = () => {
 
       {currentDevice && (
         <>
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <MapPin className="w-5 h-5" />
+          <Card className="glass-effect shadow-soft">
+            <CardHeader className="pb-4">
+              <CardTitle className="flex items-center gap-2 text-lg">
+                <div className="p-2 bg-primary/10 rounded-lg">
+                  <MapPin className="w-5 h-5 text-primary" />
+                </div>
                 Device Information
               </CardTitle>
             </CardHeader>

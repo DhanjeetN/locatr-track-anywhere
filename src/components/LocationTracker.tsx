@@ -168,10 +168,12 @@ export const LocationTracker = ({ deviceCode, onLocationUpdate }: LocationTracke
   };
 
   return (
-    <Card className="w-full">
-      <CardHeader>
-        <CardTitle className="flex items-center gap-2">
-          <MapPin className="w-5 h-5" />
+    <Card className="w-full glass-effect shadow-elegant">
+      <CardHeader className="pb-4">
+        <CardTitle className="flex items-center gap-2 text-lg">
+          <div className="p-2 bg-primary/10 rounded-lg">
+            <MapPin className="w-5 h-5 text-primary" />
+          </div>
           Location Tracker
         </CardTitle>
       </CardHeader>
@@ -204,29 +206,41 @@ export const LocationTracker = ({ deviceCode, onLocationUpdate }: LocationTracke
         )}
 
         {lastLocation && (
-          <div className="p-3 bg-secondary rounded-lg">
-            <p className="text-sm font-medium mb-2">Last Location:</p>
-            <p className="text-xs text-muted-foreground">
-              Lat: {lastLocation.latitude.toFixed(6)}<br/>
-              Lng: {lastLocation.longitude.toFixed(6)}<br/>
-              Time: {new Date(lastLocation.timestamp).toLocaleString()}
+          <div className="p-4 bg-gradient-to-r from-primary/5 to-primary/10 rounded-xl border border-primary/20">
+            <p className="text-sm font-medium mb-3 flex items-center gap-2">
+              <div className="w-2 h-2 bg-success rounded-full animate-pulse"></div>
+              Last Location
             </p>
+            <div className="grid grid-cols-1 gap-2 text-xs">
+              <div className="flex justify-between">
+                <span className="text-muted-foreground">Latitude:</span>
+                <span className="font-mono">{lastLocation.latitude.toFixed(6)}</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-muted-foreground">Longitude:</span>
+                <span className="font-mono">{lastLocation.longitude.toFixed(6)}</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-muted-foreground">Updated:</span>
+                <span>{new Date(lastLocation.timestamp).toLocaleTimeString()}</span>
+              </div>
+            </div>
           </div>
         )}
 
         <Button
           onClick={isTracking ? stopTracking : startTracking}
-          className="w-full"
+          className="w-full h-12 text-base font-medium transition-bounce"
           variant={isTracking ? "destructive" : "default"}
         >
           {isTracking ? (
             <>
-              <Pause className="w-4 h-4 mr-2" />
+              <Pause className="w-5 h-5 mr-2" />
               Stop Tracking
             </>
           ) : (
             <>
-              <Play className="w-4 h-4 mr-2" />
+              <Play className="w-5 h-5 mr-2" />
               Start Tracking
             </>
           )}

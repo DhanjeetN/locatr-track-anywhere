@@ -114,8 +114,8 @@ export const LocationMap = ({ deviceCode, locations }: LocationMapProps) => {
   }, [locations, deviceCode, isMapReady]);
 
   return (
-    <Card className="h-96 overflow-hidden">
-      <div ref={mapContainer} className="w-full h-full" />
+    <Card className="h-80 sm:h-96 overflow-hidden glass-effect shadow-elegant">
+      <div ref={mapContainer} className="w-full h-full rounded-lg" />
     </Card>
   );
 };
